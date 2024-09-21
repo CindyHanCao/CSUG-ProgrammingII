@@ -6,7 +6,14 @@ package ModuleOne;
 import java.util.Map;
 import java.util.HashMap;
 
-//use HashMap to store elements and their counts.
+/**
+ * The Bag class represents a collection of elements (a multiset) that allows duplicates.
+ * Elements are stored along with their counts, allowing multiple occurrences of the same item.
+ * use HashMap to store elements and their counts.
+ * @param <T> the type of elements in the bag.
+ * @author cindycao
+ * @version updated on 9/21/2024
+ */
 
 public class Bag<T> {
 
@@ -22,17 +29,25 @@ public class Bag<T> {
 	
 	// add method to add an item to the Bag
 	public void add(T item) {
-		elements.put(item, elements.getOrDefault(item, 0) + 1);
+		if (item != null) {
+			elements.put(item, elements.getOrDefault(item, 0) + 1);
+		} else {
+			System.out.println("Cannot add null item to the bag!");
+		}
 	}
 	
 	// remove an item from the Bag
 	public void remove(T item) {
-		if (elements.containsKey(item)) {
-			if (elements.get(item) > 1) {
-				elements.put(item, elements.get(item) - 1);
-			} else {
-				elements.remove(item);
+		if (item != null) {
+			if (elements.containsKey(item)) {
+				if (elements.get(item) > 1) {
+					elements.put(item, elements.get(item) - 1);
+				} else {
+					elements.remove(item);
+				}
 			}
+		} else {
+			System.out.println("Cannot remove null item to the bag!");
 		}
 	}
 	
@@ -55,44 +70,74 @@ public class Bag<T> {
 		
 	}
 	
+	public int size() {
+		int totalSize = 0;
+		for (int count: elements.values()) {
+			totalSize += count;
+		}
+		return totalSize;
+	}
+	
+	public void merge(Bag<T> otherBag) {
+		// loop through the other bag to get its keys and values
+		for (Map.Entry<T, Integer> entry: otherBag.elements.entrySet()) {
+			T element = entry.getKey();
+			//System.out.println("Element is: " + element);
+			int otherCount = entry.getValue();
+			//System.out.println("Element is: " + element + "count is: " + otherCount);
+			
+			// get the count from current bag for the element we are checking
+			int curCount = this.elements.getOrDefault(element, 0);
+			
+			// get the total count for the element
+			int totalCount = otherCount + curCount;
+			
+			// update the current bag
+			this.elements.put(element, totalCount);
+		}
+	}
+	
+	public Bag<T> distinct() {
+		Bag<T> newBag = new Bag<>();
+		
+		for (T item: elements.keySet()) {
+			newBag.add(item);
+		}
+		
+		return newBag;
+	}
+	
 	// test the Bag class
 	public static void main(String[] args) {
 		// create an instance of the Bag class
-		Bag<String> bag = new Bag<>();
+		Bag<String> bag1 = new Bag<>();
+		Bag<String> bag2 = new Bag<>();
 		
 		//add elements to the Bag
-		bag.add("apple");
-		bag.add("banana");
-		bag.add("pear");
-		bag.add("banana");
-		bag.add("pear");
+		bag1.add("apple");
+		bag1.add("banana");
+		bag1.add("pear");
+		bag1.add("banana");
+		bag1.add("pear");
 		
-		// print the content of the Bag
-		bag.printContent();
+		bag2.add("apple");
+		bag2.add("banana");
+		bag2.add("pear");
 		
 		//test the contains method
-		System.out.println("Testing if peach exists in the Bag: " + bag.contains("peach"));
-		System.out.println("Testing if apple exists in the Bag: " + bag.contains("apple"));
-		System.out.println("Testing if banana exists in the Bag: " + bag.contains("banana"));
+		System.out.println("Bag 1 size is: " + bag1.size());
+		System.out.println("Bag 2 size is: " + bag2.size());
 		
-		//test the count method
-		System.out.println("There are " + bag.count("apple") + " apple in the Bag.");
-		System.out.println("There are " + bag.count("banana") + " banana in the Bag.");
-		System.out.println("There are " + bag.count("pear") + " pear in the Bag.");
+		bag1.merge(bag2);
+		System.out.println("Bag 2 has merged to Bag 1.");
+		// print the content of the Bag
+		bag1.printContent();
 		
-		//test the remove method
-		bag.remove("apple");
-		System.out.println("Apple is removed.");
+		// new bag from distinct method
+		Bag<String> newBag = bag1.distinct();
+		System.out.println("Distinct elements in Bag 1");
+		newBag.printContent();
 		
-		//print the Bag content again
-		bag.printContent();
-		
-		//test the contains method for apple
-		System.out.println("Testing if apple still exists in the Bag after removal: " + bag.contains("apple"));
-		
-		//test the count method for apple
-		System.out.println("There are " + bag.count("apple") + " apple in the Bag.");
-
 	}
 
 }

@@ -5,4 +5,5 @@
  * 
  */
 module CSUGDataStructureandAlgorithm {
+	requires junit;
 }
