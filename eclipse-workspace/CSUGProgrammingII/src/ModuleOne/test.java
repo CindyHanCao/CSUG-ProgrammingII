@@ -3,16 +3,12 @@
  */
 package ModuleOne;
 
-/**
- * 
- */
 public class test {
 
 	/**
-	 * @param args
+	 * this program is to test the Employee superclass and Manager subclass
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		// test Employee superclass
 		Employee emp = new Employee("Cindy", "Cao", 123);
 		emp.setSalary(60000.00);

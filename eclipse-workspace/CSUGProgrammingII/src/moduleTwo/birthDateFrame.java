@@ -22,10 +22,15 @@ import java.time.Period;
 public class birthDateFrame extends JFrame implements ActionListener{
 
 	/**
-	 * @param args
-	 */
+	 * @param birth date label, birth date field, age label, age field, a panel for age calculation
+	 * @author Cindy Cao
+	 * Purpose: Take birth date as input, to calculate age.
+	 * 
+	 * */
+	
+   // Properties
    private static final long serialVersionUID = 1L;
-   private JLabel bdLabel;     // Label for birthdate
+   private JLabel bdLabel;     // Label for birth date
    private JLabel ageLabel;      // Label for age 
    private JTextField bdField;  // Displays birthday entered
    private JTextField ageField; // Displays calculated age amount

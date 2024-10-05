@@ -14,6 +14,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class MenuExample extends Application {
+	
+	/**
+	 * @author Cindy Cao
+	 * @param text box to display the menu results, and a box root
+	 * Purpose: to create a menu and when each menu is being clicked, certain actions will be triggered.
+	 */
 
     private TextArea textBox;
     private VBox root;

@@ -3,12 +3,20 @@ package moduleFour;
 
 	
 public class Cone extends Shape {
+	
+		/**
+		 * @author Cindy Cao
+		 * @param radius, height, surface area, and volume
+		 * Purpose: to calculate a cone's surface area and volume.
+		 */
 		
+		// Properties
 		double radius;
 		double height;
 		double area;
 		double volume;
 		
+		// Constructor for this class
 		public Cone(double radius, double height) {
 			this.radius = radius;
 			this.height = height;
@@ -19,15 +27,12 @@ public class Cone extends Shape {
 			
 			double S = Math.sqrt(radius * radius + height * height);
 			area = (Math.PI * radius * radius) + (Math.PI * radius * S);
-			//System.out.println("Sphere's area is: " + sphereArea);
 			return area;
 		}
 
 		@Override
 		public double volume() {
-			// TODO Auto-generated method stub
 			volume = (Math.PI * radius * radius * height) / 3;
-			//System.out.println("Sphere's volume is: " + sphereVolume);
 			return volume;
 		}
 		
@@ -38,6 +43,7 @@ public class Cone extends Shape {
 	               "Volume: " + volume();
 	    }
 		
+		// test the program
 		public static void main(String[] args) {
 			Cone cone = new Cone(2.00, 1.00);
 			System.out.println(cone);

@@ -3,12 +3,19 @@ package moduleFour;
 
 	
 public class Cylinder extends Shape {
+		/**
+		 * @author Cindy Cao
+		 * @param radius, height, surface area, and volume
+		 * Purpose: to calculate a cone's surface area and volume.
+		 */
 		
+		// Properties
 		double radius;
 		double height;
 		double area;
 		double volume;
 		
+		// Constructor for this class
 		public Cylinder(double radius, double height) {
 			this.radius = radius;
 			this.height = height;
@@ -16,17 +23,13 @@ public class Cylinder extends Shape {
 
 		@Override
 		public double surface_area() {
-
 			area = 2  * Math.PI * radius * height + 2  * Math.PI * (radius * radius);
-			//System.out.println("Sphere's area is: " + sphereArea);
 			return area;
 		}
 
 		@Override
 		public double volume() {
-			// TODO Auto-generated method stub
 			volume = Math.PI * (radius * radius) * height;
-			//System.out.println("Sphere's volume is: " + sphereVolume);
 			return volume;
 		}
 		
@@ -37,6 +40,7 @@ public class Cylinder extends Shape {
 	               "Volume: " + volume();
 	    }
 		
+		// test the program
 		public static void main(String[] args) {
 			Cylinder cylinder = new Cylinder(2.00, 1.00);
 			System.out.println(cylinder);
